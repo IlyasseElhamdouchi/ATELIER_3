@@ -1,0 +1,23 @@
+[
+    { "name": "Ordinateur portable", "price": 999, "category": "Électronique", "stock": 10 },
+    { "name": "Smartphone", "price": 699, "category": "Électronique", "stock": 25 },
+    { "name": "Casque Bluetooth", "price": 129, "category": "Électronique", "stock": 50 },
+    { "name": "Tablette", "price": 349, "category": "Électronique", "stock": 15 },
+    { "name": "Télévision 4K", "price": 799, "category": "Électronique", "stock": 8 },
+    { "name": "Appareil photo numérique", "price": 599, "category": "Électronique", "stock": 12 },
+    { "name": "Souris sans fil", "price": 29, "category": "Accessoires", "stock": 100 },
+    { "name": "Clavier mécanique", "price": 89, "category": "Accessoires", "stock": 60 },
+    { "name": "Chaise de bureau", "price": 149, "category": "Mobilier", "stock": 20 },
+    { "name": "Bureau informatique", "price": 249, "category": "Mobilier", "stock": 10 },
+    { "name": "Imprimante laser", "price": 199, "category": "Électronique", "stock": 18 },
+    { "name": "Disque dur externe 1To", "price": 79, "category": "Stockage", "stock": 40 },
+    { "name": "Clé USB 64Go", "price": 19, "category": "Stockage", "stock": 150 },
+    { "name": "Enceinte Bluetooth", "price": 59, "category": "Audio", "stock": 30 },
+    { "name": "Webcam HD", "price": 45, "category": "Accessoires", "stock": 35 },
+    { "name": "Microphone USB", "price": 89, "category": "Audio", "stock": 22 },
+    { "name": "Ventilateur de bureau", "price": 35, "category": "Maison", "stock": 27 },
+    { "name": "Lampe LED", "price": 25, "category": "Maison", "stock": 60 },
+    { "name": "Routeur Wi-Fi", "price": 99, "category": "Réseau", "stock": 14 },
+    { "name": "Projecteur portable", "price": 299, "category": "Électronique", "stock": 7 }
+  ]
+  

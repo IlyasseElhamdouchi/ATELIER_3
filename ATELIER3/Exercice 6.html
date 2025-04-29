@@ -1,0 +1,148 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+fetch('produits.json')
+  .then(response => response.json())
+  .then(produits => {
+    produitsListe = produits;
+    traiterProduits(produitsListe);
+  })
+  .catch(error => console.error("Erreur de chargement JSON :", error));
+
+function traiterProduits(produits) {
+
+    // question 2     
+    function CalculerPrixTotalProduits(liste){
+        TotalPrice = liste.reduce((somme,valeurCourante)=>{
+            return somme += valeurCourante.price;
+        },0);
+        console.log(`~ Le Prix Total Est : ${TotalPrice}`);
+        afficherGraphiquePrixTotal(TotalPrice);
+    }
+
+    // question 3 
+    function ProduitsFaibleStock(liste){
+        res = liste.filter(produit=>{
+            return produit.stock <= 15;
+        });
+        console.log(`~ Les produits faible en stock sont :`);
+        res.forEach(element => {
+            console.log(element);
+        });
+        afficherGraphiqueFaibleStock(res);
+    }
+
+    // question 4 
+    function TrierParPrixOrStock(liste,choice){
+        res = liste.sort((element1,element2)=>{
+            if(choice == "price") return  element1.price-element2.price;
+            else if(choice == "stock") return  element1.stock-element2.stock;
+        });
+        res.forEach(element => {
+            console.log(element);
+        });
+    }
+
+    // question 5
+    function SearchProduct(liste,name){
+        liste.forEach(elementCourant=>{
+            if(elementCourant.name == name)
+                console.log(elementCourant);
+        });
+    }
+
+    function afficherGraphiquePrixTotal(totalPrice) {
+        var ctx = document.getElementById('prixTotalChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Total des Prix'],
+                datasets: [{
+                    label: 'Prix Total',
+                    data: [totalPrice],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    function afficherGraphiqueFaibleStock(produits) {
+        var categories = produits.map(p => p.category);
+        var categoriesCount = categories.reduce((acc, cat) => {
+            acc[cat] = (acc[cat] || 0) + 1;
+            return acc;
+        }, {});
+
+        var ctx = document.getElementById('faibleStockChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(categoriesCount),
+                datasets: [{
+                    label: 'Produits en Faible Stock',
+                    data: Object.values(categoriesCount),
+                    backgroundColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A133FF'],
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }]
+            }
+        });
+    }
+
+    function afficherGraphiqueCategorie(produits) {
+        var categories = produits.map(p => p.category);
+        var categoriesCount = categories.reduce((acc, cat) => {
+            acc[cat] = (acc[cat] || 0) + 1;
+            return acc;
+        }, {});
+
+        var ctx = document.getElementById('categorieChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(categoriesCount),
+                datasets: [{
+                    label: 'Produits par Catégorie',
+                    data: Object.values(categoriesCount),
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    function afficherGraphiques() {
+        CalculerPrixTotalProduits(produits);
+        ProduitsFaibleStock(produits);
+        afficherGraphiqueCategorie(produits);
+    }
+
+    afficherGraphiques(); 
+
+    var name = window.prompt("Entrez le nom du produit a rechercher : ");
+    SearchProduct(produits, name);
+}
+
+</script>
+
+<canvas id="prixTotalChart" width="400" height="200"></canvas>
+<canvas id="faibleStockChart" width="400" height="200"></canvas>
+<canvas id="categorieChart" width="400" height="200"></canvas>
